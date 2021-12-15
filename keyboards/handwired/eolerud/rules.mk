@@ -8,6 +8,7 @@ BOOTLOADER = atmel-dfu
 #   change yes to no to disable
 #
 DYNAMIC_MACRO_ENABLE = yes
+LEADER_ENABLE = yes
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = yes       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
