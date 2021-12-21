@@ -23,8 +23,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, KC_F12,               KC_DEL,
 	       _______,  _______, _______, _______,   RESET, _______, _______, _______, _______, _______, KC_PSCR, _______, _______,   _______,
                _______,  _______, _______, _______, _______, _______, KC_HOME, _______, _______, _______,    _______,  _______,        KC_LEAD,
-	       _______,   DM_PLY1, DM_PLY2, DM_RSTP, DM_REC1, DM_REC2,  KC_END, _______,    _______,_______,  _______,                 _______,            _______,
-	       _______, _______, _______,                       _______,                         _______,    _______, _______,         _______,   _______, _______, _______
+	       _______,   DM_PLY1, DM_PLY2, DM_RSTP, DM_REC1, DM_REC2,  KC_END, _______,    _______,_______,  _______,                 _______,            KC_MS_U,
+	       _______, _______, _______,                       _______,                         _______,    _______, _______,         _______,   KC_MS_L, KC_MS_D, KC_MS_R
 
     )
 };
@@ -46,6 +46,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 	return false;
 }
 
+void _user_tap10(uint16_t keycode) {
+	for (int i = 0; i < 10; i++ ){
+		tap_code(keycode);
+	}
+}
+
 LEADER_EXTERNS();
 void matrix_scan_user(void) {
 	LEADER_DICTIONARY() {
@@ -54,6 +60,21 @@ void matrix_scan_user(void) {
 
 		SEQ_ONE_KEY(KC_C) {
 			SEND_STRING("cromwell.k12.ct.us");
+		}
+		SEQ_ONE_KEY(KC_ENT) {		//leader key + enter -> mouse button 1
+			tap_code(KC_BTN1);
+		}
+		SEQ_ONE_KEY(KC_LEFT) {		//leader key + arrow key -> arrow key x10
+			_user_tap10(KC_LEFT);
+		}
+		SEQ_ONE_KEY(KC_UP) {
+			_user_tap10(KC_UP);
+		}
+		SEQ_ONE_KEY(KC_DOWN) {
+			_user_tap10(KC_DOWN);
+		}
+		SEQ_ONE_KEY(KC_RIGHT) {
+			_user_tap10(KC_RIGHT);
 		}
 	}
 }
