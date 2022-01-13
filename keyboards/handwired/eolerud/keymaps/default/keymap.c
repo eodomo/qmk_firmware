@@ -59,7 +59,7 @@ void matrix_scan_user(void) {
 		leader_end();
 
 		SEQ_ONE_KEY(KC_C) {
-			SEND_STRING("cromwell.k12.ct.us");
+			SEND_STRING("charlesit.com");
 		}
 		SEQ_ONE_KEY(KC_ENT) {		//leader key + enter -> mouse button 1
 			tap_code(KC_BTN1);
