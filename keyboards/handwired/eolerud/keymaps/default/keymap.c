@@ -81,10 +81,13 @@ void matrix_scan_user(void) {
 			_user_tap10(KC_RIGHT);
 		}
 		SEQ_ONE_KEY(KC_P) {
-			send_string("If you have any further questions or concerns, please call us at (860) 344-9628 or reply-all to this email.");
+			send_string("If you have any further questions or concerns, please call us at 860.344.9628 or reply-all to this email.");
 		}
 		SEQ_ONE_KEY(KC_W) {
-			send_string("When you have some time for us to look at this, please give us a call at (860) 344-9628, or you can reply-all to this email to schedule a meeting time.");
+			send_string("When you have some time for us to look at this, please give us a call at 860.344.9628, or you can reply-all to this email to schedule a meeting time.");
+		}
+		SEQ_TWO_KEYS(KC_P, KC_P){
+            send_string("860.344.9628");
 		}
 	}
 }
