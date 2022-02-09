@@ -10,7 +10,8 @@ enum layer_names {
 };
 
 enum my_keycodes {
-	TICKET = SAFE_RANGE
+	TICKET = SAFE_RANGE,
+	DASH
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -28,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	       _______,  _______, _______, _______,   RESET, _______, _______,  TICKET, _______, _______, KC_PSCR, _______, _______,   _______,
                _______,  _______, _______, _______, _______, _______, KC_HOME, _______, _______, _______,    _______,  _______,        KC_LEAD,
 	       _______,   DM_PLY1, DM_PLY2, DM_RSTP, DM_REC1, DM_REC2,  KC_END, _______,    _______,_______,  _______,                 _______,            KC_MS_U,
-	       _______, _______, _______,                       _______,                         _______,    _______, _______,         _______,   KC_MS_L, KC_MS_D, KC_MS_R
+	       _______, _______, _______,                          DASH,                         _______,    _______, _______,         _______,   KC_MS_L, KC_MS_D, KC_MS_R
 
     )
 };
@@ -102,6 +103,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 				send_string("Work done:");
 				tap_code(KC_ENTER);
 				send_string("- ");
+			}
+			return false;
+		case DASH:
+			if (record->event.pressed) {
+				send_string("    - ");
 			}
 			return false;
 		default:
