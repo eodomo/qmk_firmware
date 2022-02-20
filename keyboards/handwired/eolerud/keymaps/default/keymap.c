@@ -51,8 +51,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 	return false;
 }
 
-void _user_tap10(uint16_t keycode) {
-	for (int i = 0; i < 10; i++ ){
+void _user_tap5(uint16_t keycode) {
+	for (int i = 0; i < 5; i++ ){
 		tap_code(keycode);
 	}
 }
@@ -70,22 +70,34 @@ void matrix_scan_user(void) {
 			tap_code(KC_BTN1);
 		}
 		SEQ_ONE_KEY(KC_LEFT) {		//leader key + arrow key -> arrow key x10
-			_user_tap10(KC_LEFT);
+			_user_tap5(KC_LEFT);
 		}
 		SEQ_ONE_KEY(KC_UP) {
-			_user_tap10(KC_UP);
+			_user_tap5(KC_UP);
 		}
 		SEQ_ONE_KEY(KC_DOWN) {
-			_user_tap10(KC_DOWN);
+			_user_tap5(KC_DOWN);
 		}
 		SEQ_ONE_KEY(KC_RIGHT) {
-			_user_tap10(KC_RIGHT);
+			_user_tap5(KC_RIGHT);
+		}
+		SEQ_TWO_KEYS(KC_LEFT, KC_LEFT){
+		    _user_tap5(KC_LEFT); _user_tap5(KC_LEFT);
+		}
+		SEQ_TWO_KEYS(KC_RIGHT, KC_RIGHT){
+		    _user_tap5(KC_RIGHT); _user_tap5(KC_RIGHT);
+		}
+		SEQ_TWO_KEYS(KC_DOWN, KC_DOWN){
+		    _user_tap5(KC_DOWN); _user_tap5(KC_DOWN);
+		}
+		SEQ_TWO_KEYS(KC_UP, KC_UP){
+		    _user_tap5(KC_UP); _user_tap5(KC_UP);
 		}
 		SEQ_ONE_KEY(KC_P) {
-			send_string("If you have any further questions or concerns, please call us at 860.344.9628 or reply-all to this email.");
+			send_string("If you have any further questions or concerns, please call me at 860.344.9628 or reply-all to this email.");
 		}
 		SEQ_ONE_KEY(KC_W) {
-			send_string("When you have some time for us to look at this, please give us a call at 860.344.9628, or you can reply-all to this email to schedule a meeting time.");
+			send_string("When you have some time for me to look at this, please give me a call at 860.344.9628, or you can reply-all to this email to schedule a meeting time.");
 		}
 		SEQ_TWO_KEYS(KC_P, KC_P){
             send_string("860.344.9628");
