@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+#include "features/autocorrection.h"
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -106,6 +107,7 @@ void matrix_scan_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	if (!process_autocorrection(keycode, record)) {return false;}
 	switch(keycode) {
 		case TICKET:
 			if (record->event.pressed) {
