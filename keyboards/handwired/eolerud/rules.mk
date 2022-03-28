@@ -23,3 +23,4 @@ RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
 ENCODER_ENABLE = yes        # Enable encoders
 SRC += features/autocorrection.c
+SRC += features/select_word.c

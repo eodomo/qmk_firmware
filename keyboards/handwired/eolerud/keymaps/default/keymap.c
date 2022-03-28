@@ -3,6 +3,7 @@
 
 #include QMK_KEYBOARD_H
 #include "features/autocorrection.h"
+#include "features/select_word.h"
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -12,7 +13,8 @@ enum layer_names {
 
 enum my_keycodes {
 	TICKET = SAFE_RANGE,
-	DASH
+	DASH,
+	SELWORD
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -27,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Raise */
     [_RAISE] = LAYOUT(
       _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, KC_F12,               KC_DEL,
-	       _______,  _______, _______, _______,   RESET, _______, _______,  TICKET, _______, _______, KC_PSCR, _______, _______,   _______,
+	       _______,  _______, SELWORD, _______,   RESET, _______, _______,  TICKET, _______, _______, KC_PSCR, _______, _______,   _______,
                _______,  _______, _______, _______, _______, _______, KC_HOME, _______, _______, _______,    _______,  _______,        KC_LEAD,
 	       _______,   DM_PLY1, DM_PLY2, DM_RSTP, DM_REC1, DM_REC2,  KC_END, _______,    _______,_______,  _______,                 _______,            KC_MS_U,
 	       _______, _______, _______,                          DASH,                         _______,    _______, _______,         _______,   KC_MS_L, KC_MS_D, KC_MS_R
@@ -108,6 +110,7 @@ void matrix_scan_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	if (!process_autocorrection(keycode, record)) {return false;}
+	if (!process_select_word(keycode, record, SELWORD)) {return false;}
 	switch(keycode) {
 		case TICKET:
 			if (record->event.pressed) {
