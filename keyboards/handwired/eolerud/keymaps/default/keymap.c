@@ -9,6 +9,7 @@
 enum layer_names {
     _BASE,
     _RAISE,
+    _LOWER
 };
 
 enum my_keycodes {
@@ -24,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_LBRC, KC_RBRC, KC_BSLS,
 		KC_CAPS,     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,       KC_ENT,
 		KC_LSFT,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,               KC_RSFT,             KC_UP,
-		KC_LCTL, KC_LGUI, KC_LALT,                        KC_SPC,                         KC_RALT,    KC_RGUI, MO(_RAISE),    KC_RCTL,   KC_LEFT, KC_DOWN, KC_RIGHT
+		KC_LCTL, KC_LGUI, KC_LALT,                        KC_SPC,                         KC_RALT, MO(_LOWER), MO(_RAISE),    KC_RCTL,   KC_LEFT, KC_DOWN, KC_RIGHT
     ),
     /* Raise */
     [_RAISE] = LAYOUT(
@@ -33,6 +34,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                _______,  _______, _______, _______, _______, _______, KC_HOME, _______, _______, _______,    _______,  _______,        KC_LEAD,
 	       _______,   DM_PLY1, DM_PLY2, DM_RSTP, DM_REC1, DM_REC2,  KC_END, _______,    _______,_______,  _______,                 _______,            KC_MS_U,
 	       _______, _______, _______,                          DASH,                         _______,    _______, _______,         _______,   KC_MS_L, KC_MS_D, KC_MS_R
+
+    ),
+    // LOWER
+    [_LOWER] = LAYOUT(
+      _______,    KC_1,    KC_2,    KC_3, _______, _______, _______, _______, _______, _______, _______, _______,_______,              _______,
+	       _______,   KC_4,     KC_5,    KC_6,  _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______,
+               _______,   KC_7,     KC_8,    KC_9,  _______, _______, _______, _______, _______, _______,    _______,  _______,        _______,
+	       _______, _______,      KC_0, _______, _______, _______, _______, _______,    _______,_______,  _______,                 _______,            _______,
+	       _______, _______, _______,                       _______,                         _______,    _______, _______,         _______,   _______, _______, _______
 
     )
 };
@@ -96,11 +106,17 @@ void matrix_scan_user(void) {
 		SEQ_TWO_KEYS(KC_UP, KC_UP){
 		    _user_tap5(KC_UP); _user_tap5(KC_UP);
 		}
-		SEQ_ONE_KEY(KC_P) {
-			send_string("If you have any further questions or concerns, please call me at 860.344.9628 or reply-all to this email.");
+		SEQ_ONE_KEY(KC_I) {
+			send_string("If you have any questions about this, please feel free to give me a call at 860.344.9628.");
 		}
 		SEQ_ONE_KEY(KC_W) {
 			send_string("When you have some time for me to look at this, please give me a call at 860.344.9628, or you can reply-all to this email to schedule a meeting time.");
+		}
+		SEQ_ONE_KEY(KC_S) {
+			send_string("Start-ADSyncSyncCycle -PolicyType Delta");
+		}
+		SEQ_TWO_KEYS(KC_S, KC_S) {
+			send_string("net user jsnow /active:yes");
 		}
 		SEQ_TWO_KEYS(KC_P, KC_P){
             send_string("860.344.9628");
