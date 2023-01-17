@@ -134,8 +134,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 				send_string("* ");
 				tap_code(KC_ENTER);
 				tap_code(KC_ENTER);
-				send_string("Work done:");
-				tap_code(KC_ENTER);
 				send_string("- ");
 			}
 			return false;
